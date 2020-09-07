@@ -1,0 +1,28 @@
+{% include "bootstrap.html" %}{% include "navbar.html" %}
+<style>
+  body {
+    background-color: black;
+    color: powderblue;
+  }
+  .container {
+    background-color: black;
+    color: powderblue;
+  }
+</style>
+<div class="container">
+  <h4>you were tagged in</h4>
+
+  {% for notification in notifications %}
+  <p>{{notification.tweet}}</p>
+  <p>at:{{notification.post_date}}</p>
+  <p>
+    tagged by:
+    <a href="/user/{{notification.user.username}}"
+      >@{{notification.user.username}}</a
+    >
+  </p>
+  <p><a href="/tweet/{{notification.id}}">Click Here to view tweet</a></p>
+  <br />
+  <br />
+  {% endfor %}
+</div>

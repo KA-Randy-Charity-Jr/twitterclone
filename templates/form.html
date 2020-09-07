@@ -1,0 +1,17 @@
+{% include "bootstrap.html" %} {% include "navbar.html" %}
+<style>
+  body {
+    background-color: black;
+    color: powderblue;
+  }
+  .container-fluid {
+    background-color: black;
+    color: powderblue;
+  }
+</style>
+<div class="container-fluid">
+  <form action="" method="post">
+    {% csrf_token %} {{form.as_p}}
+    <input type="submit" value="submit" />
+  </form>
+</div>

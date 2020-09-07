@@ -1,0 +1,16 @@
+{% include "bootstrap.html" %}{% include "navbar.html" %}
+<style>
+  body {
+    background-color: black;
+    color: powderblue;
+  }
+  div {
+    background-color: black;
+    color: powderblue;
+  }
+</style>
+<div class="container-fluid">
+  <a href="/user/{{tweet.user.username}}"><h1>{{tweet.user.username}}</a></h1>
+  <h2>{{tweet.tweet}}</h2>
+  <p>{{tweet.post_date}}</p>
+</div>
