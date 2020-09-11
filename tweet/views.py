@@ -6,6 +6,7 @@ from notification.models import Notification
 from twitteruser.models import TwitterUser
 from django.contrib.auth.decorators import login_required, permission_required
 from django.views.generic import TemplateView
+
 import re
 # Create your views here.
 
@@ -45,9 +46,10 @@ class CreateTweet(TemplateView):
                 return HttpResponseRedirect(reverse("homepage"))
 def tweet_view(request, tweet_id):
     thecount = 0
-    count = Notification.objects.filter(tagged=request.user, isread=False)
-    if count:
-        thecount=count.count
+    if request.user.is_authenticated:
+        count = Notification.objects.filter(tagged=request.user, isread=False)
+        if count:
+            thecount=count.count
     tweet = Tweet.objects.get(id=tweet_id)
     return render(request,"tweet.html",{"tweet":tweet,"count":thecount})
 
@@ -55,9 +57,10 @@ def tweet_view(request, tweet_id):
 class TweetView(TemplateView):
     def get(self, request, tweet_id):
         thecount = 0
-        count = Notification.objects.filter(tagged=request.user, isread=False)
-        if count:
-            thecount=count.count
+        if request.user.is_authenticated:
+            count = Notification.objects.filter(tagged=request.user, isread=False)
+            if count:
+                thecount=count.count
         tweet = Tweet.objects.get(id=tweet_id)
         return render(request,"tweet.html",{"tweet":tweet,"count":thecount})
                 

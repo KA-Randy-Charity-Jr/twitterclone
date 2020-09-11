@@ -3,6 +3,7 @@ from tweet.models import Tweet,TwitterUser
 from notification.models import Notification
 from django.contrib.auth.decorators import login_required, permission_required
 from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 @login_required
 def index_view(request):
@@ -25,7 +26,7 @@ def index_view(request):
 
     return render(request, 'index.html', {"tweets": mytweets, "users": myusers, "count": thecount, "anumber": anumber})
  
-class IndexView(TemplateView):
+class IndexView(LoginRequiredMixin,TemplateView):
     def get(self, request):
         anumber= 0
         thecount = 0

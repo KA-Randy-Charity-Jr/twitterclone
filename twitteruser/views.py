@@ -37,8 +37,9 @@ class UserView(TemplateView):
         isfollow = False
         user = TwitterUser.objects.get(username=username)
         tweets=Tweet.objects.filter(user=user).order_by("-id")
-        if TwitterUser.objects.filter(username=username,followers=request.user):
-            isfollow = True
+        if request.user.is_authenticated:
+            if TwitterUser.objects.filter(username=username,followers=request.user):
+                isfollow = True
         return render(request, "user.html", {"user": user, "isfollow": isfollow, "tweets": tweets, "count": thecount, "followers": followers})
     
 def follow_view(request, username):
